@@ -1,0 +1,56 @@
+
+# Creating Our Scrapy Project
+|> scrapy startproject <project_name>
+
+
+################################################################################################################################################
+
+Scrapy provides a number of different spider types, however, in this tutorial we will cover the most common one, the generic Spider. Here are some of the most common ones:
+
+1. Spider - Takes a list of start_urls and scrapes each one with a parse method.
+2. CrawlSpider - Designed to crawl a full website by following any links it finds.
+3. SitemapSpider - Designed to extract URLs from a sitemap
+
+################################################################################################################################################
+
+# To create a new generic spider, simply run the genspider command:
+|> scrapy genspider chocolatespider chocolate.co.uk
+
+
+################################################################################################################################################
+
+Note: If you would like to use IPython as your Scrapy shell (much more powerful and provides smart auto-completion and colorized output), then make sure you have IPython installed:
+
+# pip install IPython
+
+And then edit your scrapy.cfg file like so:
+
+## scrapy.cfg
+[settings]
+default = chocolatescraper.settings
+shell = ipython
+
+################################################################################################################################################
+
+The first thing we want to do is fetch the main products page of the chocolate site in our Scrapy shell.
+
+|> fetch('https://www.chocolate.co.uk/collections/all')
+
+As we can see, we successful retrieve the page from chocolate.co.uk, and Scrapy shell has automatically saved the HTML response in the response variable.
+
+################################################################################################################################################
+
+Now that we have a spider we can run it by going to the top level in our scrapy project and running the following command.
+|> scrapy crawl chocolatespider 
+
+################################################################################################################################################
+
+If we want to save the data to a JSON file we can use the -O option, followed by the name of the file.
+
+|> scrapy crawl chocolatespider -O myscrapeddata.json
+
+If we want to save the data to a CSV file we can do so too.
+
+|> scrapy crawl chocolatespider -O myscrapeddata.csv
+
+################################################################################################################################################
